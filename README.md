@@ -34,7 +34,7 @@ request body:
 
 ##### Update table entry
 endpoint:
-`GET http://localhost:8083/update/{appName}`
+`POST http://localhost:8083/update/{appName}`
 
 request body:
 ```
