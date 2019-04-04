@@ -2,7 +2,6 @@ package com.mapper.dynamo.controller;
 
 import com.mapper.dynamo.dynamo.Dynamo;
 import com.mapper.dynamo.model.AppToSchema;
-import com.mapper.dynamo.model.Schema;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
@@ -30,7 +29,7 @@ public class Controller {
     }
 
     @RequestMapping(value = "/update/{appName}", method = RequestMethod.POST)
-    public AppToSchema update(@PathVariable String appName, @RequestBody Schema newSchema) {
+    public AppToSchema update(@PathVariable String appName, @RequestBody AppToSchema.Schema newSchema) {
 
         return db.update(appName, newSchema);
     }
