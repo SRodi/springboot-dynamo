@@ -1,20 +1,14 @@
 package com.mapper.dynamo.model;
 
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBAttribute;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBHashKey;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
-import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTypeConverted;
-import com.mapper.dynamo.helper.SchemaConverter;
-import com.mapper.dynamo.helper.SchemasConverter;
-
-import java.util.ArrayList;
+import com.amazonaws.services.dynamodbv2.datamodeling.*;
+import java.util.List;
 
 @DynamoDBTable(tableName = "AppNameToAppSchema")
 public class AppToSchema {
 
     private String appName;
     private Schema baseSchema;
-    private ArrayList<Schema> revisions;
+    private List<Schema> revisions;
 
     // Partition key
     @DynamoDBHashKey(attributeName = "AppName")
@@ -25,8 +19,7 @@ public class AppToSchema {
         this.appName = appName;
     }
 
-    @DynamoDBTypeConverted(converter = SchemaConverter.class)
-    @DynamoDBAttribute(attributeName = "Schema")
+    @DynamoDBAttribute(attributeName = "BaseSchema")
     public Schema getSchema() {
         return baseSchema;
     }
@@ -34,9 +27,35 @@ public class AppToSchema {
         this.baseSchema = baseSchema;
     }
 
-    @DynamoDBTypeConverted(converter = SchemasConverter.class)
-    @DynamoDBAttribute(attributeName = "Schemas")
-    public ArrayList<Schema> getSchemas() {return revisions;}
-    public void setSchemas(ArrayList<Schema> revisions) {this.revisions = revisions;}
+    @DynamoDBAttribute(attributeName = "Revisions")
+    public List<Schema> getSchemas() {return revisions;}
+    public void setSchemas(List<Schema> revisions) {this.revisions = revisions;}
+
+    @DynamoDBDocument
+    public static class Schema {
+
+        private int version=1;
+        private String schemaString;
+
+        @DynamoDBAttribute(attributeName = "Version")
+        public int getVersion() {
+            return version;
+        }
+        public void setVersion(int version) {
+            this.version = version;
+        }
+
+        @DynamoDBAttribute(attributeName = "SchemaString")
+        public String getSchemaString() {
+            return schemaString;
+        }
+        public void setSchemaString(String schemaString) {
+            this.schemaString = schemaString;
+        }
+
+        public void incrementVersion(Schema latestSchema){
+            this.setVersion(latestSchema.getVersion()+1);
+        }
+    }
 
 }
