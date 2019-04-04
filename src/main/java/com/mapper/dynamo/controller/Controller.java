@@ -33,4 +33,10 @@ public class Controller {
 
         return db.update(appName, newSchema);
     }
+
+    @RequestMapping(value = "/delete/{appName}", method = RequestMethod.DELETE)
+    public boolean delete(@PathVariable String appName) {
+
+        return db.delete(appName);
+    }
 }

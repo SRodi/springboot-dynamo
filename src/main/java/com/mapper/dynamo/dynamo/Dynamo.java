@@ -66,4 +66,20 @@ public class Dynamo {
         return appRetrieved;
 
     }
+
+    /**
+     * Retrieves app reference from AppNameToSchema table on DynamoDB and deletes it, returns true if successful
+     * @param appName
+     * @return
+     */
+    public boolean delete(String appName){
+
+        try{
+            mapper.delete(read(appName));
+            return true;
+        }catch(Exception e){
+            return false;
+        }
+
+    }
 }

@@ -1,9 +1,10 @@
-###DyamoDB mapper
+### DyamoDB mapper
 - custom object Schema will be stored in AWS DynamoDb as Map datatype
 - arraylist of custom objects is stored as List datatype
 
-####Functionalities:
-#####Create table entry
+#### Functionalities:
+
+##### Create table entry
 endpoint:
 `PUT http://localhost:8083/write/`
 
@@ -16,7 +17,8 @@ request body:
     }
 }
 ```
-#####Read table entry
+
+##### Read table entry
 endpoint:
 `GET http://localhost:8083/read/{appName}`
 
@@ -29,7 +31,8 @@ request body:
     }
 }
 ```
-#####Update table entry
+
+##### Update table entry
 endpoint:
 `GET http://localhost:8083/update/{appName}`
 
@@ -40,7 +43,11 @@ request body:
 }
 ```
 
-###Sample GET response:
+##### Delete table entry
+endpoint:
+`DELETE http://localhost:8083/delete/{appName}`
+
+### Sample GET response:
 response body:
 ```
 {
