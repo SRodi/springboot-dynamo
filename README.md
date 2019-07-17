@@ -1,3 +1,4 @@
+[![Build Status](http://159.65.143.184:8080/buildStatus/icon?job=dynamoDB-mapper)](http://159.65.143.184:8080/job/dynamoDB-mapper/)
 ### DyamoDB mapper
 - custom object Schema will be stored in AWS DynamoDb as Map datatype
 - arraylist of custom objects is stored as List datatype

@@ -19,7 +19,7 @@ public class Dynamo {
      *  - initializes DynamoDBMapper
      */
     public Dynamo() {
-        client = AmazonDynamoDBClientBuilder.standard().build();
+        client = AmazonDynamoDBClientBuilder.standard().withRegion("us-east-1").build();
         mapper = new DynamoDBMapper(client);
     }
 
