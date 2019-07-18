@@ -2,25 +2,25 @@ pipeline {
 
     agent any
 
-    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'dev', variable: 'AWS_ACCESS_KEY']]) {
-                   sh "echo this is ${env.AWS_ACCESS_KEY}"
-                   sh "echo this is ${env.AWS_SECRET_KEY}"
-           }
+    environment {
+         AWS_ACCESS_KEY = ${env.AWS_ACCESS_KEY}
+         AWS_SECRET_KEY = ${env.AWS_SECRET_KEY}
+    }
 
     stages {
         stage('compiling'){
             steps {
-                //sh 'mvn compile'
+                sh 'mvn compile'
             }
         }
         stage('packaging'){
             steps {
-                //sh 'mvn package'
+                sh 'mvn package'
             }
         }
         stage('testing'){
             steps {
-                //sh 'mvn test'
+                sh 'mvn test'
             }
         }
     }
