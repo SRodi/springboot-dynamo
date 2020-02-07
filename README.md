@@ -19,7 +19,7 @@ endpoint:
 request body:
 ```
 {
-    "name": "your_app_name",
+    "name": "your_name",
     "description": "your_description"
 }
 ```
