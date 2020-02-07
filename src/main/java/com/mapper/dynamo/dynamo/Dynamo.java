@@ -3,14 +3,13 @@ package com.mapper.dynamo.dynamo;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDB;
 import com.amazonaws.services.dynamodbv2.AmazonDynamoDBClientBuilder;
 import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBMapper;
-import com.mapper.dynamo.model.AppToSchema;
+import com.mapper.dynamo.model.TableSchema;
 import org.springframework.stereotype.Component;
-import java.util.ArrayList;
 
 @Component
 public class Dynamo {
 
-    private  AmazonDynamoDB client;
+    AmazonDynamoDB client;
     private DynamoDBMapper mapper;
 
     /**
@@ -19,63 +18,40 @@ public class Dynamo {
      *  - initializes DynamoDBMapper
      */
     public Dynamo() {
-        client = AmazonDynamoDBClientBuilder.standard().withRegion("us-east-1").build();
+        client = AmazonDynamoDBClientBuilder.standard().withRegion("eu-west-1").build();
         mapper = new DynamoDBMapper(client);
     }
 
     /**
-     * Read from AppNameToSchema table on DynamoDB, returns model object AppToSchema
-     * @param appName
-     * @return AppToSchema
+     * Read from MulticloudTest table on DynamoDB, returns model object TableSchema
+     * @param name
+     * @return TableSchema
      */
-    public AppToSchema read(String appName){
+    public TableSchema read(String name){
 
-        return mapper.load(AppToSchema.class, appName);
+        return mapper.load(TableSchema.class, name);
     }
 
     /**
-     * Write to AppNameToSchema table on DynamoDB, returns model object AppToSchema
-     * @param appToSchema
+     * Write to MulticloudTest table on DynamoDB, returns model object TableSchema
+     * @param tableSchema
      * @return
      */
-    public AppToSchema write(AppToSchema appToSchema){
+    public TableSchema write(TableSchema tableSchema){
 
-        mapper.save(appToSchema);
-        return appToSchema;
+        mapper.save(tableSchema);
+        return tableSchema;
     }
 
     /**
-     * Retrieves app reference from AppNameToSchema table on DynamoDB and updates it, returns model object AppToSchema
-     * @param appName
-     * @param newSchema
+     * Retrieves app reference from MulticloudTest table on DynamoDB and deletes it, returns true if successful
+     * @param name
      * @return
      */
-    public AppToSchema update(String appName, AppToSchema.Schema newSchema){
-
-        AppToSchema appRetrieved= mapper.load(AppToSchema.class, appName);
-        // if no versioned schema initialize array and increment from base version
-        if(appRetrieved.getSchemas() == null){
-            appRetrieved.setSchemas(new ArrayList<>());
-            newSchema.incrementVersion(appRetrieved.getSchema());
-        }
-        else // increment from last versioned schema
-            newSchema.incrementVersion(appRetrieved.getSchemas().get(appRetrieved.getSchemas().size()-1));
-        // add new schema to array list of schemas
-        appRetrieved.getSchemas().add(newSchema);
-        mapper.save(appRetrieved);
-        return appRetrieved;
-
-    }
-
-    /**
-     * Retrieves app reference from AppNameToSchema table on DynamoDB and deletes it, returns true if successful
-     * @param appName
-     * @return
-     */
-    public boolean delete(String appName){
+    public boolean delete(String name){
 
         try{
-            mapper.delete(read(appName));
+            mapper.delete(read(name));
             return true;
         }catch(Exception e){
             return false;
