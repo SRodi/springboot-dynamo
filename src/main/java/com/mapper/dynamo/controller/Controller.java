@@ -1,9 +1,8 @@
 package com.mapper.dynamo.controller;
 
 import com.mapper.dynamo.dynamo.Dynamo;
-import com.mapper.dynamo.model.AppToSchema;
+import com.mapper.dynamo.model.TableSchema;
 import org.springframework.web.bind.annotation.*;
-
 import javax.annotation.PostConstruct;
 
 @RestController
@@ -13,30 +12,25 @@ public class Controller {
 
     @PostConstruct
     protected void init() {
+
         db = new Dynamo();
     }
 
-    @RequestMapping(value = "/read/{appName}", method = RequestMethod.GET)
-    public AppToSchema read(@PathVariable String appName) {
+    @RequestMapping(value = "/read/{name}", method = RequestMethod.GET)
+    public TableSchema read(@PathVariable String name) {
 
-        return db.read(appName);
+        return db.read(name);
     }
 
     @RequestMapping(value = "/write", method = RequestMethod.PUT)
-    public AppToSchema write(@RequestBody AppToSchema appToSchema) {
+    public TableSchema write(@RequestBody TableSchema tableSchema) {
 
-        return db.write(appToSchema);
+        return db.write(tableSchema);
     }
 
-    @RequestMapping(value = "/update/{appName}", method = RequestMethod.POST)
-    public AppToSchema update(@PathVariable String appName, @RequestBody AppToSchema.Schema newSchema) {
+    @RequestMapping(value = "/delete/{name}", method = RequestMethod.DELETE)
+    public boolean delete(@PathVariable String name) {
 
-        return db.update(appName, newSchema);
-    }
-
-    @RequestMapping(value = "/delete/{appName}", method = RequestMethod.DELETE)
-    public boolean delete(@PathVariable String appName) {
-
-        return db.delete(appName);
+        return db.delete(name);
     }
 }
