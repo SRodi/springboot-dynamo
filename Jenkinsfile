@@ -3,10 +3,11 @@ pipeline {
    tools {
       // Install the Maven version configured as "M3" and add it to the path.
       maven "M3"
+      def image
    }
 
    stages {
-      def image
+
       stage('Build') {
          steps {
             // Get code from GitHub repository
@@ -26,19 +27,15 @@ pipeline {
          }
       }
 
-      stage('Build Docker image'){
+      stage('Build Docker image and Push to registry'){
+        def image
         steps {
             // hardcoded project name (test)
             image = docker.build("gcr.io/pulumi-259310/sr-spring-boot-docker")
-        }
-        stage('Test image') {
+            // test image
             image.inside {
                 sh 'echo "at least it runs"'
-            }
-        }
-      }
-      stage('Push to registry') {
-        steps {
+            // push to registry
             withDockerRegistry(credentialsId: 'gcr:pulumi-259310', url: 'https://grc.io') {
                 image.push("${env.BUILD_NUMBER}")
                 image.push("v1")
