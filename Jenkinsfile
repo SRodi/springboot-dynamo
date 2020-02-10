@@ -27,7 +27,8 @@ pipeline {
       stage('Build Docker image and Push to registry'){
         steps {
             withDockerRegistry(registry: [credentialsId: 'gcr:pulumi-259310', toolName: 'docker', url: 'https://gcr.io']) {
-                docker.build("gcr.io/pulumi-259310/sr-spring-boot-docker:v1").push()
+                def image = docker.build("gcr.io/pulumi-259310/sr-spring-boot-docker:v1")
+                image.push()
             }
         }
       }
