@@ -26,9 +26,7 @@ pipeline {
 
       stage('Build Docker image and Push to registry'){
         steps {
-            // This step should not normally be used in your script. Consult the inline help for details.
-            withDockerRegistry(credentialsId: 'gcr:pulumi-259310', toolName: 'docker', url: 'https://gcr.io') {
-                // some block
+            withRegistry(url["https://gcr.io", credentialsId: 'gcr:pulumi-259310' ]) {
                 sh 'echo "test"'
             }
         }
