@@ -8,20 +8,30 @@ pipeline {
     }
 
     stages {
-        stage('compiling'){
-            steps {
-                sh 'mvn compile'
-            }
-        }
-        stage('packaging'){
-            steps {
-                sh 'mvn package'
-            }
-        }
-        stage('testing'){
-            steps {
-                sh 'mvn test'
-            }
-        }
+//         stage('compiling'){
+//             steps {
+//                 sh 'mvn compile'
+//             }
+//         }
+//         stage('packaging'){
+//             steps {
+//                 sh 'mvn package'
+//             }
+//         }
+//         stage('testing'){
+//             steps {
+//                 sh 'mvn test'
+//             }
+//         }
+//         stage ('build and push to registry'){
+//             steps {
+//
+//                 withCredentials([file(credentialsId: 'gcp-secret', variable: 'GC_KEY')]){
+//
+//                 }
+//
+//             }
+//
+//         }
     }
 }
