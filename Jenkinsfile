@@ -6,7 +6,6 @@ pipeline {
    }
 
    stages {
-
       stage('Build') {
          steps {
             // Get code from GitHub repository
@@ -15,7 +14,6 @@ pipeline {
             // Run Maven on a Unix agent.
             sh "mvn -Dmaven.test.failure.ignore=true clean package"
          }
-
          post {
             // If Maven was able to run the tests, even if some of the test
             // failed, record the test results and archive the jar file.
@@ -34,6 +32,7 @@ pipeline {
             // test image
             image.inside {
                 sh 'echo "at least it runs"'
+            }
             // push to registry
             withDockerRegistry(credentialsId: 'gcr:pulumi-259310', url: 'https://grc.io') {
                 image.push("${env.BUILD_NUMBER}")
