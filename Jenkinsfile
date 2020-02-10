@@ -26,16 +26,9 @@ pipeline {
 
       stage('Build Docker image and Push to registry'){
         steps {
-            // hardcoded project name (test)
-            image = docker.build("gcr.io/pulumi-259310/sr-spring-boot-docker")
-            // test image
-            image.inside {
-                sh 'echo "at least it runs"'
-            }
             // push to registry
             withDockerRegistry(credentialsId: 'gcr:pulumi-259310', toolName: 'docker', url: 'https://gcr.io') {
-                image.push("${env.BUILD_NUMBER}")
-                image.push("v1")
+                docker.build("gcr.io/pulumi-259310/sr-spring-boot-docker").push("v1")
             }
         }
       }
