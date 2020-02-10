@@ -26,10 +26,15 @@ pipeline {
 
       stage('Build Docker image and Push to registry'){
         steps {
-            // push to registry
-            withDockerRegistry(credentialsId: 'gcr:pulumi-259310', toolName: 'docker', url: 'https://gcr.io') {
-                docker.build("gcr.io/pulumi-259310/sr-spring-boot-docker").push("v1")
-            }
+            dockerFingerprintFrom dockerfile: 'Dockerfile', image: 'gcr.io/pulumi-259310/sr-spring-boot-docker', toolName: 'docker'
+//             // push to registry
+//             withDockerRegistry(credentialsId: 'gcr:pulumi-259310', toolName: 'docker', url: 'https://gcr.io') {
+//                 docker.build("gcr.io/pulumi-259310/sr-spring-boot-docker").push("v1")
+//             }
+//             // This step should not normally be used in your script. Consult the inline help for details.
+//             withDockerRegistry(credentialsId: 'gcr:pulumi-259310', toolName: 'docker', url: 'https://gcr.io') {
+//                 // some block
+//             }
         }
       }
    }
