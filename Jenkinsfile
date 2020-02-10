@@ -26,9 +26,8 @@ pipeline {
 
       stage('Build Docker image and Push to registry'){
         steps {
-            withRegistry([url: "https://gcr.io", credentialsId: 'gcr:pulumi-259310']) {
-                sh 'echo "test"'
-            }
+            sh 'docker build -t gcr.io/pulumi-259310/sr-springboot-dynamodb:v1 .'
+            sh 'docker push gcr.io/pulumi-259310/sr-springboot-dynamodb:v1'
         }
       }
    }
