@@ -1,5 +1,4 @@
-pipeline {
-   agent any
+node {
    tools {
       // Install the Maven version configured as "M3" and add it to the path.
       maven "M3"
@@ -24,13 +23,11 @@ pipeline {
          }
       }
 
-      stage('Image') {
-        node {
-          git branch: 'multicloud', credentialsId: 'github', url: 'https://github.com/SRodi/springboot-dynamo.git'
-          withDockerRegistry(credentialsId: 'gcr:pulumi-259310', toolName: 'docker', url: 'https://gcr.io'){
+      stage('Push Docker image to registry') {
+        git branch: 'multicloud', credentialsId: 'github', url: 'https://github.com/SRodi/springboot-dynamo.git'
+        withDockerRegistry(credentialsId: 'gcr:pulumi-259310', toolName: 'docker', url: 'https://gcr.io'){
             def newApp = docker.build "gcr.io/pulumi-259310/sr-springboot-dynamodb:v2"
             newApp.push()
-          }
         }
       }
    }
