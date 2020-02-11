@@ -1,4 +1,3 @@
-[![Build Status](http://159.65.143.184:8080/buildStatus/icon?job=springboot-dynamodb)](http://159.65.143.184:8080/job/springboot-dynamodb/)
 # SpringBoot microservice sample application
 This application enables DynamoDB (AWS hosted database) CRUD operations.
 
