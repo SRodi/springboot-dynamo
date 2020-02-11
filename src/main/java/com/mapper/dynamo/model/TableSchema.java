@@ -8,15 +8,6 @@ public class TableSchema {
     private String name;
     private String description;
 
-    @DynamoDBAttribute(attributeName = "Description")
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     // Partition key
     @DynamoDBHashKey(attributeName = "Name")
     public String getName() {
@@ -24,6 +15,15 @@ public class TableSchema {
     }
     public void setName(String appName) {
         this.name = appName;
+    }
+
+    @DynamoDBAttribute(attributeName = "Description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
 }
