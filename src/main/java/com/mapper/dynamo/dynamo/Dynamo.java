@@ -11,7 +11,6 @@ public class Dynamo {
 
     AmazonDynamoDB client;
     private DynamoDBMapper mapper;
-
     /**
      * construct Dynamo instance:
      *  - initializes AmazonDynamoDB client
@@ -30,6 +29,14 @@ public class Dynamo {
     public TableSchema read(String name){
 
         return mapper.load(TableSchema.class, name);
+    }
+
+    /**
+     * Return a message for empty requests
+     * @return String
+     */
+    public String emptyRequest(){
+        return "Not a valid request";
     }
 
     /**

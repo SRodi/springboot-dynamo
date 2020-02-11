@@ -1,0 +1,4 @@
+com/mapper/dynamo/model/TableSchema.class
+com/mapper/dynamo/dynamo/Dynamo.class
+com/mapper/dynamo/controller/Controller.class
+com/mapper/dynamo/DynamoApplication.class

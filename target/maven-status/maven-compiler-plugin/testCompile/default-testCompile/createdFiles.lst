@@ -1,0 +1,4 @@
+test/SomeTest.class
+test/Base.class
+com/mapper/dynamo/DynamoApplicationTests.class
+test/OtherTest.class

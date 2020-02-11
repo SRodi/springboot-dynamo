@@ -22,6 +22,12 @@ public class Controller {
         return db.read(name);
     }
 
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String emptyRequest() {
+
+        return db.emptyRequest();
+    }
+
     @RequestMapping(value = "/write", method = RequestMethod.PUT)
     public TableSchema write(@RequestBody TableSchema tableSchema) {
 
