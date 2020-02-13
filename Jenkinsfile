@@ -9,7 +9,7 @@ pipeline {
       stage('Build') {
          steps {
             // Get code from GitHub repository
-            git branch: 'multicloud', credentialsId: 'github', url: 'https://github.com/SRodi/springboot-dynamo.git'
+            git branch: 'dev', credentialsId: 'github', url: 'https://github.com/SRodi/springboot-dynamo.git'
 
             // Run Maven on a Unix agent.
             sh "mvn -Dmaven.test.failure.ignore=true clean package"
