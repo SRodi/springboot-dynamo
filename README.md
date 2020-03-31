@@ -1,3 +1,5 @@
+[![Build Status](http://188.166.67.88:8080/buildStatus/icon?job=spring-microservice/job/master)](http://188.166.67.88:8080/job/spring-microservice/job/master/)
+
 # SpringBoot microservice sample application
 This application enables DynamoDB (AWS hosted database) CRUD operations.
 
