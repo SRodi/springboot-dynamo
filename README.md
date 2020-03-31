@@ -1,5 +1,4 @@
-[![Build Status](http://188.166.67.88:8080/job/spring-microservice/job/push-image/badge/icon)](http://188.166.67.88:8080/job/spring-microservice/job/push-image/)
-# SpringBoot microservice sample application
+[![Build Status](http://188.166.67.88:8080/buildStatus/icon?job=spring-microservice/job/push-image)](http://188.166.67.88:8080/job/spring-microservice/job/push-image/)# SpringBoot microservice sample application
 This application enables DynamoDB (AWS hosted database) CRUD operations.
 
 ## Prerequisites
